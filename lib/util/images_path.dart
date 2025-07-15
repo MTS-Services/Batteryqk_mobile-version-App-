@@ -1,7 +1,7 @@
 class AppImages {
   static const String _basePath = "assets/images";
   static const String welcome = "$_basePath/welcome.png";
-  static const String logo = "$_basePath/logo.png";
+  static const String logo = "$_basePath/appbar.png";
   static const String academies1a =
       "https://d2h8hramu3xqoh.cloudfront.net/blog/wp-content/uploads/2018/07/Swimming-Benefits-Children-MentallyEmotionallyand-Physically.webp";
   static const String academies1b =

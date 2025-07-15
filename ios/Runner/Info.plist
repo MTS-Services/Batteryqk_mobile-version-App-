@@ -45,5 +45,30 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>1424646842117585</string> <!-- আপনার Facebook App ID -->
+        </array>
+      </dict>
+    </array>
+
+    <key>FacebookAppID</key>
+    <string>123456789012345</string>
+
+    <key>FacebookClientToken</key>
+    <string>2764c1870adc9001aa3d136d55677146</string> <!-- Facebook থেকে পাওয়া Client Token -->
+
+    <key>FacebookDisplayName</key>
+    <string>BatteryQK</string> <!-- আপনার অ্যাপের নাম -->
+
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>fbapi</string>
+      <string>fb-messenger-share-api</string>
+    </array>
+
 </dict>
 </plist>

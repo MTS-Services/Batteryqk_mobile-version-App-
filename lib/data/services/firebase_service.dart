@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:batteryqk_web_app/common/widgets/show_snack_bar.dart';
 import 'package:batteryqk_web_app/data/services/utility/urls.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -29,11 +30,9 @@ class AuthControllers extends GetxController {
     });
   }
 
-  Future<bool> signUp(
-    String email,
-    String password,
-    BuildContext context,
-  ) async {
+  Future<bool> signUp(String email,
+      String password,
+      BuildContext context,) async {
     try {
       isLoading.value = true;
       await _auth.createUserWithEmailAndPassword(
@@ -42,18 +41,19 @@ class AuthControllers extends GetxController {
       );
       return true;
     } catch (e) {
-      showSnackbar(context, 'Sign Up Error'.tr, e.toString().split('] ').last);
+      showSnackbar(context, 'Sign Up Error'.tr, e
+          .toString()
+          .split('] ')
+          .last);
       return false;
     } finally {
       isLoading.value = false;
     }
   }
 
-  Future<void> signIn(
-    String email,
-    String password,
-    BuildContext context,
-  ) async {
+  Future<void> signIn(String email,
+      String password,
+      BuildContext context,) async {
     try {
       isLoading.value = true;
       await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -90,7 +90,10 @@ class AuthControllers extends GetxController {
       isLoading.value = true;
       await _auth.signOut();
     } catch (e) {
-      showSnackbar(context, 'Logout Error'.tr, e.toString().split('] ').last);
+      showSnackbar(context, 'Logout Error'.tr, e
+          .toString()
+          .split('] ')
+          .last);
     } finally {
       isLoading.value = false;
     }
@@ -113,7 +116,7 @@ class AuthControllers extends GetxController {
       }
 
       final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      await googleUser.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -134,11 +137,15 @@ class AuthControllers extends GetxController {
           return false;
         }
 
-        final String fname = name.split(' ').first;
+        final String fname = name
+            .split(' ')
+            .first;
         final String lname =
-            name.split(' ').length > 1
-                ? name.split(' ').sublist(1).join(' ')
-                : '';
+        name
+            .split(' ')
+            .length > 1
+            ? name.split(' ').sublist(1).join(' ')
+            : '';
 
         final String tempPassword =
             'E#1234'; // You can set a fixed or random password
@@ -155,7 +162,6 @@ class AuthControllers extends GetxController {
             "uid": uid,
           }),
         );
-        print("Create User Response: ${createResponse.body}");
 
         final loginResponse = await http.post(
           Uri.parse(Urls.userLogin),
@@ -163,15 +169,13 @@ class AuthControllers extends GetxController {
           body: jsonEncode({"email": email, "password": tempPassword}),
         );
 
-        print(fname + lname + tempPassword);
-
         if (loginResponse.statusCode == 200) {
           final responseData = jsonDecode(loginResponse.body);
           final String? apiToken = responseData['token'];
 
           if (apiToken != null) {
             await AuthController.saveToken(apiToken);
-            print("API Token Saved: $apiToken");
+
             showSnackbar(
               Get.context!,
               'Success'.tr,
@@ -187,9 +191,6 @@ class AuthControllers extends GetxController {
             );
           }
         } else {
-          print(
-            "Login failed: ${loginResponse.statusCode} ${loginResponse.body}",
-          );
           showSnackbar(
             Get.context!,
             'Login Failed'.tr,
@@ -199,11 +200,32 @@ class AuthControllers extends GetxController {
       } else {
         showSnackbar(Get.context!, 'Error'.tr, 'Firebase user not found'.tr);
       }
-    } catch (e, s) {
-      print("Exception: $e");
+    } catch (e) {
       showSnackbar(Get.context!, 'Google Sign-In Error'.tr, e.toString());
     }
 
     return false;
+  }
+
+  Future<UserCredential?> signInWithFacebook() async {
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login(
+        permissions:[],
+      );
+
+      if (loginResult.status == LoginStatus.success) {
+        final AccessToken accessToken = loginResult.accessToken!;
+        final OAuthCredential credential =
+        FacebookAuthProvider.credential(accessToken.tokenString);
+
+        return await FirebaseAuth.instance.signInWithCredential(credential);
+      } else {
+        print('Facebook login failed: ${loginResult.message}');
+        return null;
+      }
+    } catch (e) {
+      print('Facebook login exception: $e');
+      return null;
+    }
   }
 }

@@ -49,7 +49,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               if (!isBack) const SizedBox(width: 0),
 
               /// Logo & Branding
-              Image.asset(AppImages.logo, height: 40, width: 55),
+              Image.asset(AppImages.logo, height: 60, width: 60),
               const SizedBox(width: 10),
               Text(
                 'Batteryqk',

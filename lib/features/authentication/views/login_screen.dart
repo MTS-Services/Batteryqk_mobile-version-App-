@@ -1,6 +1,6 @@
 import 'package:batteryqk_web_app/data/services/api_services.dart';
 import 'package:batteryqk_web_app/features/authentication/models/user_login.dart';
-import 'package:get/get.dart'; // add this import for .tr
+import 'package:get/get.dart';
 import 'package:batteryqk_web_app/common/widgets/custom_bottom_navigation_bar.dart';
 import 'package:batteryqk_web_app/common/widgets/custom_text_button.dart';
 import 'package:batteryqk_web_app/common/widgets/show_snack_bar.dart';
@@ -217,6 +217,13 @@ class _LogInScreenState extends State<LogInScreen> {
                       icon: FontAwesomeIcons.google,
                       onTap: () {
                         authController.googleSignIn();
+                      },
+                    ),
+                    SizedBox(width: 15,),
+                    buildSocialButton(
+                      icon: FontAwesomeIcons.facebook,
+                      onTap: () {
+                        authController.signInWithFacebook();
                       },
                     ),
                   ],

@@ -30,10 +30,12 @@ class LanguagePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 20.h),
-            Image.asset(AppImages.logo, scale: 4),
+            Image.asset(AppImages.logo),
             Spacer(),
             Text(
-              initialSelection?'choose_your_language'.tr:'change_your_language'.tr,
+              initialSelection
+                  ? 'choose_your_language'.tr
+                  : 'change_your_language'.tr,
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 20),
@@ -43,31 +45,40 @@ class LanguagePage extends StatelessWidget {
                 color: AppColor.whiteColor,
                 child: ListTile(
                   title: Center(child: Text('English')), // Use the translation
-                  onTap:initialSelection? () {
-                    print('entered as english and initial selection$initialSelection');
-                    // Toggle the language to English
-                    languageController.toggleLanguage(true);
-                    // Get.find<BuildListingCardController>().refreshForLanguage();
-                    // Get.find<NotificationController>().fetchNotifications();
-                    // Get.find<UserController>().fetchUser();
-                    // Navigate to the bottom navigation
-                    Get.off(
-                      () => LogInScreen(),
-                      arguments: {'refresh': true},
-                    );
-                  }:() {
-                    print('entered as english and initial selection$initialSelection');
-                    // Toggle the language to English
-                    languageController.toggleLanguage(true);
-                    Get.find<BuildListingCardController>().refreshForLanguage();
-                    Get.find<NotificationController>().fetchNotifications();
-                    Get.find<UserController>().fetchUser();
-                    // Navigate to the bottom navigation
-                    Get.off(
-                      () => CustomBottomNavigationBar(),
-                      arguments: {'refresh': true},
-                    );
-                  },
+                  onTap:
+                      initialSelection
+                          ? () {
+                            print(
+                              'entered as english and initial selection$initialSelection',
+                            );
+                            // Toggle the language to English
+                            languageController.toggleLanguage(true);
+                            // Get.find<BuildListingCardController>().refreshForLanguage();
+                            // Get.find<NotificationController>().fetchNotifications();
+                            // Get.find<UserController>().fetchUser();
+                            // Navigate to the bottom navigation
+                            Get.off(
+                              () => LogInScreen(),
+                              arguments: {'refresh': true},
+                            );
+                          }
+                          : () {
+                            print(
+                              'entered as english and initial selection$initialSelection',
+                            );
+                            // Toggle the language to English
+                            languageController.toggleLanguage(true);
+                            Get.find<BuildListingCardController>()
+                                .refreshForLanguage();
+                            Get.find<NotificationController>()
+                                .fetchNotifications();
+                            Get.find<UserController>().fetchUser();
+                            // Navigate to the bottom navigation
+                            Get.off(
+                              () => CustomBottomNavigationBar(),
+                              arguments: {'refresh': true},
+                            );
+                          },
                 ),
               ),
             ),
@@ -80,31 +91,40 @@ class LanguagePage extends StatelessWidget {
                 color: AppColor.whiteColor,
                 child: ListTile(
                   title: Center(child: Text("عربي")), // Use the translation
-                  onTap:initialSelection? () {
-                    print('entered as arabic and initial selection$initialSelection');
-                    // Toggle the language to Arabic
-                    languageController.toggleLanguage(false);
-                    // Get.find<BuildListingCardController>().refreshForLanguage();
-                    // Get.find<NotificationController>().fetchNotifications();
-                    // Get.find<UserController>().fetchUser();
-                    // Navigate to the bottom navigation
-                    Get.off(
-                      () => LogInScreen(),
-                      arguments: {'refresh': true},
-                    );
-                  }:() {
-                    print('entered as arabic and initial selection$initialSelection');
-                    // Toggle the language to English
-                    languageController.toggleLanguage(false);
-                    Get.find<BuildListingCardController>().refreshForLanguage();
-                    Get.find<NotificationController>().fetchNotifications();
-                    Get.find<UserController>().fetchUser();
-                    // Navigate to the bottom navigation
-                    Get.off(
-                      () => CustomBottomNavigationBar(),
-                      arguments: {'refresh': true},
-                    );
-                  },
+                  onTap:
+                      initialSelection
+                          ? () {
+                            print(
+                              'entered as arabic and initial selection$initialSelection',
+                            );
+                            // Toggle the language to Arabic
+                            languageController.toggleLanguage(false);
+                            // Get.find<BuildListingCardController>().refreshForLanguage();
+                            // Get.find<NotificationController>().fetchNotifications();
+                            // Get.find<UserController>().fetchUser();
+                            // Navigate to the bottom navigation
+                            Get.off(
+                              () => LogInScreen(),
+                              arguments: {'refresh': true},
+                            );
+                          }
+                          : () {
+                            print(
+                              'entered as arabic and initial selection$initialSelection',
+                            );
+                            // Toggle the language to English
+                            languageController.toggleLanguage(false);
+                            Get.find<BuildListingCardController>()
+                                .refreshForLanguage();
+                            Get.find<NotificationController>()
+                                .fetchNotifications();
+                            Get.find<UserController>().fetchUser();
+                            // Navigate to the bottom navigation
+                            Get.off(
+                              () => CustomBottomNavigationBar(),
+                              arguments: {'refresh': true},
+                            );
+                          },
                 ),
               ),
             ),

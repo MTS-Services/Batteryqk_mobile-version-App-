@@ -2,6 +2,7 @@ import 'package:batteryqk_web_app/features/authentication/views/notification_pag
 import 'package:flutter/material.dart';
 import 'package:batteryqk_web_app/util/colors.dart';
 import 'package:batteryqk_web_app/util/images_path.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isBack;
@@ -27,30 +28,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: SafeArea(
         child: Container(
           height: 70,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
               if (isBack)
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new,
-                    color: Colors.black87,
-                  ),
-                  onPressed: () {
-                    if (onPressed != null) {
-                      onPressed!();
-                    } else {
-                      Navigator.pop(context);
-                    }
-                  },
+                SizedBox(
+                  width: 25.w,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.black87,
+                    ),
+                    onPressed: () {
+                      if (onPressed != null) {
+                        onPressed!();
+                      } else {
+                        Navigator.pop(context);
+                      }
+                    },
 
-                  tooltip: 'Back',
+                    tooltip: 'Back',
+                  ),
                 ),
               if (!isBack) const SizedBox(width: 0),
 
               /// Logo & Branding
               Image.asset(AppImages.logo, height: 60, width: 60),
-              const SizedBox(width: 10),
+              // const SizedBox(width: 10),
               Text(
                 'Batteryqk',
                 style: TextStyle(

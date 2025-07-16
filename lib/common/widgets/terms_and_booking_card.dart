@@ -1,3 +1,5 @@
+import 'package:batteryqk_web_app/features/authentication/views/privacy_policy_screen.dart';
+import 'package:batteryqk_web_app/features/authentication/views/terms_and_conditons_screen.dart';
 import 'package:get/get.dart'; // Add this import for .tr
 import 'package:batteryqk_web_app/util/colors.dart';
 import 'package:flutter/gestures.dart';
@@ -71,6 +73,7 @@ class _TermsAndBookingCardState extends State<TermsAndBookingCard> {
                               TapGestureRecognizer()
                                 ..onTap = () {
                                   // Handle Terms of Service tap
+                                  Get.to(() => TermsAndConditionsScreen());
                                 },
                         ),
                         TextSpan(
@@ -92,6 +95,7 @@ class _TermsAndBookingCardState extends State<TermsAndBookingCard> {
                               TapGestureRecognizer()
                                 ..onTap = () {
                                   // Handle Privacy Policy tap
+                                  Get.to(() => PrivacyPolicyScreen());
                                 },
                         ),
                         const TextSpan(text: '.'),

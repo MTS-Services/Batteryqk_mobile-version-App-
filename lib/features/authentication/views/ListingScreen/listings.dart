@@ -9,7 +9,8 @@ import 'widgets/filter_list.dart';
 import 'widgets/listing_list.dart';
 
 class Listings extends StatefulWidget {
-  const Listings({super.key});
+  const Listings({super.key, required this.isBack});
+  final bool isBack;
 
   @override
   State<Listings> createState() => _ListingsState();
@@ -199,9 +200,9 @@ class _ListingsState extends State<Listings> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(isBack: false),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: CustomAppBar(isBack: widget.isBack),
       ),
       body: Obx(() {
         if (_listController.isloading.value) {

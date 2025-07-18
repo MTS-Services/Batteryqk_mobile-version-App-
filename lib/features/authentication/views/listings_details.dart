@@ -29,7 +29,8 @@ class ListingsDetails extends StatefulWidget {
     required this.averageRating,
     required this.numOfReviews,
     required this.index,
-    required this.gender, required this.discount,
+    required this.gender,
+    required this.discount,
   });
 
   final String mainImage;
@@ -58,12 +59,11 @@ class ListingsDetails extends StatefulWidget {
 
 class _ListingsDetailsState extends State<ListingsDetails> {
   final List<String> contractInfos = [
-    '555-123-4567',
-    'info@eliteswimmingacademy.com',
-    'www.eliteswimmingacademy.com',
+    '+971527999940',
+    'info.batteryqk@gmail.com',
+    'www.batteryqk.com/',
   ];
   final controller = Get.find<BuildListingCardController>();
-
 
   @override
   Widget build(BuildContext context) {

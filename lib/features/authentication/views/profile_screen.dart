@@ -1,6 +1,7 @@
 import 'package:batteryqk_web_app/features/authentication/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/widgets/show_snack_bar.dart';
 import '../../../data/services/firebase_service.dart';
@@ -26,18 +27,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final nameController = TextEditingController();
   final _focusNode = FocusNode();
 
-  final _locationController = TextEditingController(text: 'Dhaka, Bangladesh');
+  final _locationController = TextEditingController();
   final _locationFocusNode = FocusNode();
   final UserController _controller = Get.find<UserController>();
   final AuthControllers authController = Get.put(AuthControllers());
   Future<void> _refreshData() async => await _controller.fetchUser();
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _controller.fetchUser();
-    });
-  }
+void initState() {
+  super.initState();
+
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
+    await _controller.fetchUser();
+
+    // Load saved location from SharedPreferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedLocation = prefs.getString('user_location');
+    if (savedLocation != null && savedLocation.isNotEmpty) {
+      _locationController.text = savedLocation;
+    }
+  });
+
+  // Listen to location text changes and save to SharedPreferences
+  _locationController.addListener(() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user_location', _locationController.text);
+  });
+}
+
 
   @override
   void dispose() {

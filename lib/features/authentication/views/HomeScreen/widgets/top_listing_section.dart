@@ -34,7 +34,7 @@ class TopListingsSection extends StatelessWidget {
                 onPressed:
                     () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Listings()),
+                      MaterialPageRoute(builder: (context) => Listings(isBack: true,)),
                     ),
                 child: Text(
                   "view_all".tr,

@@ -20,7 +20,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    const Listings(),
+    const Listings(isBack: false),
     // const BookScreen(),
     const ProfileScreen(),
   ];

@@ -6,6 +6,8 @@ import '../models/user_model.dart';
 class UserController extends GetxController {
   final isLoading = false.obs;
   var userList = <UserModel>[].obs;
+  var userLocation = ''.obs;
+
 
   @override
   void onInit() {

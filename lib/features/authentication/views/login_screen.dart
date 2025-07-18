@@ -219,13 +219,13 @@ class _LogInScreenState extends State<LogInScreen> {
                         authController.googleSignIn();
                       },
                     ),
-                    SizedBox(width: 15,),
-                    buildSocialButton(
-                      icon: FontAwesomeIcons.facebook,
-                      onTap: () {
-                        authController.signInWithFacebook();
-                      },
-                    ),
+                    // SizedBox(width: 15,),
+                    // buildSocialButton(
+                    //   icon: FontAwesomeIcons.facebook,
+                    //   onTap: () {
+                    //     authController.signInWithFacebook();
+                    //   },
+                    // ),
                   ],
                 ),
               ],

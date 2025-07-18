@@ -33,27 +33,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final AuthControllers authController = Get.put(AuthControllers());
   Future<void> _refreshData() async => await _controller.fetchUser();
   @override
-void initState() {
-  super.initState();
+  void initState() {
+    super.initState();
 
-  WidgetsBinding.instance.addPostFrameCallback((_) async {
-    await _controller.fetchUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _controller.fetchUser();
 
-    // Load saved location from SharedPreferences
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? savedLocation = prefs.getString('user_location');
-    if (savedLocation != null && savedLocation.isNotEmpty) {
-      _locationController.text = savedLocation;
-    }
-  });
+      // Load saved location from SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? savedLocation = prefs.getString('user_location');
+      if (savedLocation != null && savedLocation.isNotEmpty) {
+        _locationController.text = savedLocation;
+      }
+    });
 
-  // Listen to location text changes and save to SharedPreferences
-  _locationController.addListener(() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user_location', _locationController.text);
-  });
-}
-
+    // Listen to location text changes and save to SharedPreferences
+    _locationController.addListener(() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user_location', _locationController.text);
+    });
+  }
 
   @override
   void dispose() {
@@ -310,6 +309,7 @@ void initState() {
   /// ------------------- Logout -------------------
   Future<void> signOut() async {
     try {
+      _locationController.text = '';
       await authController.logOut(context);
       showSnackbar(context, 'Success', 'Logged out successfully');
       Get.offAll(() => const LogInScreen());

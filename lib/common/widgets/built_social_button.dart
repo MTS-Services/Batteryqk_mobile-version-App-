@@ -2,6 +2,7 @@ import 'package:batteryqk_web_app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 Widget buildSocialButton({
   required IconData icon,
@@ -21,7 +22,7 @@ Widget buildSocialButton({
             FaIcon(icon, color: Colors.white),
             SizedBox(width: 10.w),
             Text(
-              'Sign Up With Google',
+              'sign_up_with_google'.tr,
               style: TextStyle(fontSize: 18.sp, color: Colors.white),
             ),
           ],

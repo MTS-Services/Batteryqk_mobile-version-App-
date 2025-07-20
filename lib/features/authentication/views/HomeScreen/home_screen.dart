@@ -10,7 +10,8 @@ import 'widgets/top_listing_section.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  final BuildListingCardController apiController = Get.find<BuildListingCardController>();
+  final BuildListingCardController apiController =
+      Get.find<BuildListingCardController>();
 
   Future<void> _refreshData() async {
     await apiController.fetchListData();
@@ -29,19 +30,26 @@ class HomeScreen extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (apiController.hasError.value) {
+          debugPrint(apiController.errorMessage.value); // optional for devs
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(apiController.errorMessage.value),
+                Text(
+                  apiController.userFriendlyError,
+                  style: const TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
                 ElevatedButton(
                   onPressed: apiController.fetchListData,
-                  child: const Text('Retry'),
+                  child: Text('retry'.tr),
                 ),
               ],
             ),
           );
         }
+
         return RefreshIndicator(
           onRefresh: _refreshData,
           child: ListView(

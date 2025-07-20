@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../util/colors.dart';
 
@@ -15,7 +16,7 @@ class OfferContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        'Get $offer% off',
+        '${'get'.tr} $offer% ${'off'.tr}',
         style: TextStyle(fontSize: 12, color: AppColor.whiteColor),
       ),
     );

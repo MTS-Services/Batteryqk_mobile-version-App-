@@ -58,7 +58,7 @@ class TopListingsSection extends StatelessWidget {
                 title: data.name,
                 location: '${data.mainFeatures} | ${data.location}',
                 tag: data.price,
-                rating: 4.5,
+                // rating: 4.5,
                 description: data.description,
                 imageUrl: data.mainImage,
                 averageRating: data.averageRating,

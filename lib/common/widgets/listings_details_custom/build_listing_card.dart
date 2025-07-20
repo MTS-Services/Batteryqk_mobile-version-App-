@@ -9,7 +9,7 @@ class BuildListingCard extends StatelessWidget {
   final String title;
   final String location;
   final String tag;
-  final double rating;
+  // final double rating;
   final String description;
   final String imageUrl;
   final BuildContext context;
@@ -23,7 +23,7 @@ class BuildListingCard extends StatelessWidget {
     required this.title,
     required this.location,
     required this.tag,
-    required this.rating,
+    // required this.rating,
     required this.description,
     required this.imageUrl,
     required this.context,

@@ -1,5 +1,6 @@
 import 'package:batteryqk_web_app/features/authentication/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,18 +66,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: _refreshData,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _buildHeader(),
-                const SizedBox(height: 20),
-                _buildMenuAndLocationSection(),
-              ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff00BCD4),
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: RefreshIndicator(
+        onRefresh: _refreshData,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildHeader(),
+                  const SizedBox(height: 20),
+                  _buildMenuAndLocationSection(),
+                ],
+              ),
             ),
           ),
         ),

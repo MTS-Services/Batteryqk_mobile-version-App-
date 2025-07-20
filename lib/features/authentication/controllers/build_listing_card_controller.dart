@@ -40,7 +40,23 @@ class BuildListingCardController extends GetxController {
     }
   }
 
-  /// ✅ New helper method to reset filters easily
+  /// ✅ User-friendly error message
+  String get userFriendlyError {
+  final msg = errorMessage.value.toLowerCase();
+
+  if (msg.contains("failed host lookup") || msg.contains("socketexception")) {
+    return "no_internet".tr;
+  } else if (msg.contains("timeout")) {
+    return "timeout_error".tr;
+  } else if (msg.contains("404")) {
+    return "data_not_found".tr;
+  } else {
+    return "generic_error".tr;
+  }
+}
+
+
+  /// ✅ Reset filters
   void resetFilters() {
     filteredListingData.value = listingCardData;
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../util/images_path.dart';
+
 class CustomDetailsImageGroup extends StatelessWidget {
   final String image1a;
   final String image1b;
@@ -42,7 +44,9 @@ class CustomDetailsImageGroup extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.network(image1a, fit: BoxFit.cover),
+                image1a.isNotEmpty
+                    ? Image.network(image1a, fit: BoxFit.cover)
+                    : Image.asset(AppImages.logo, fit: BoxFit.cover),
                 Positioned(
                   bottom: 14,
                   left: 14,
@@ -92,9 +96,11 @@ class CustomDetailsImageGroup extends StatelessWidget {
   }
 
   Widget _buildSmallImage(String imagePath, Size size) {
+    final isNetworkImage = imagePath.isNotEmpty;
+
     return Expanded(
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(6), // More reduced roundness
+        borderRadius: BorderRadius.circular(6),
         child: Container(
           height: size.height * 0.18,
           decoration: BoxDecoration(
@@ -106,7 +112,10 @@ class CustomDetailsImageGroup extends StatelessWidget {
               ),
             ],
           ),
-          child: Image.network(imagePath, fit: BoxFit.cover),
+          child:
+              isNetworkImage
+                  ? Image.network(imagePath, fit: BoxFit.cover)
+                  : Image.asset(AppImages.logo, fit: BoxFit.cover),
         ),
       ),
     );

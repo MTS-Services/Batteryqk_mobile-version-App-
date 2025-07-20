@@ -146,55 +146,59 @@ class _ListingsState extends State<Listings> {
   }
 
   void _showFilterModal() {
-  List<String> discount =
-      _listController.listingCardData.map((e) => e.discount).toSet().toList();
-  List<String> allLocation =
-      _listController.listingCardData.map((e) => e.location).toSet().toList();
-  List<String> ageGroup =
-      _listController.listingCardData.map((e) => e.ageGroup[0]).toSet().toList();
-  List<String> rating = _listController.listingCardData
-      .map((e) => e.averageRating.toString())
-      .toSet()
-      .toList();
-  List<String> gender =
-      _listController.listingCardData.map((e) => e.gender).toSet().toList();
-  List<String> price =
-      _listController.listingCardData.map((e) => e.price).toSet().toList();
+    List<String> discount =
+        _listController.listingCardData.map((e) => e.discount).toSet().toList();
+    List<String> allLocation =
+        _listController.listingCardData.map((e) => e.location).toSet().toList();
+    List<String> ageGroup =
+        _listController.listingCardData
+            .map((e) => e.ageGroup[0])
+            .toSet()
+            .toList();
+    List<String> rating =
+        _listController.listingCardData
+            .map((e) => e.averageRating.toString())
+            .toSet()
+            .toList();
+    List<String> gender =
+        _listController.listingCardData.map((e) => e.gender).toSet().toList();
+    List<String> price =
+        _listController.listingCardData.map((e) => e.price).toSet().toList();
 
-  showModalBottomSheet(
-    backgroundColor: AppColor.whiteColor,
-    elevation: 4,
-    context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-    ),
-    builder: (context) {
-      return FilterModal(
-        dropdownController: dropdownController,
-        allLocation: allLocation,
-        ageGroup: ageGroup,
-        discount: discount,
-        rating: rating,
-        gender: gender,
-        price: price,
-        isLogin: islogin,
-        onApply: applyFilter,
-        onReset: _resetFilters,
-      );
-    },
-  ).whenComplete(() {
-    // ✅ This runs when user taps outside or closes the sheet
-    dropdownController.selectedMainCategories.clear();
-    dropdownController.selectedSubCategories.clear();
-    dropdownController.selectedSports.clear();
-    dropdownController.selectedLocation.value = null;
-    dropdownController.selectedAgeGroup.value = null;
-    dropdownController.selectedRating.value = null;
-    dropdownController.selectedGender.value = null;
-    dropdownController.selectedPrice.value = null;
-    dropdownController.selectedDiscount.value = null;
-  });
-}
+    showModalBottomSheet(
+      backgroundColor: AppColor.whiteColor,
+      elevation: 4,
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return FilterModal(
+          dropdownController: dropdownController,
+          allLocation: allLocation,
+          ageGroup: ageGroup,
+          discount: discount,
+          rating: rating,
+          gender: gender,
+          price: price,
+          isLogin: islogin,
+          onApply: applyFilter,
+          onReset: _resetFilters,
+        );
+      },
+    ).whenComplete(() {
+      // ✅ This runs when user taps outside or closes the sheet
+      dropdownController.selectedMainCategories.clear();
+      dropdownController.selectedSubCategories.clear();
+      dropdownController.selectedSports.clear();
+      dropdownController.selectedLocation.value = null;
+      dropdownController.selectedAgeGroup.value = null;
+      dropdownController.selectedRating.value = null;
+      dropdownController.selectedGender.value = null;
+      dropdownController.selectedPrice.value = null;
+      dropdownController.selectedDiscount.value = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,14 +213,20 @@ class _ListingsState extends State<Listings> {
           return const Center(child: CircularProgressIndicator());
         }
         if (_listController.hasError.value) {
+          debugPrint(_listController.errorMessage.value); // optional for devs
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(_listController.errorMessage.value),
+                Text(
+                  _listController.userFriendlyError,
+                  style: const TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
                 ElevatedButton(
                   onPressed: _listController.fetchListData,
-                  child: const Text('Retry'),
+                  child: Text('retry'.tr),
                 ),
               ],
             ),

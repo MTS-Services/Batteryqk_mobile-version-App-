@@ -18,7 +18,6 @@ class ListingsList extends StatelessWidget {
           // ✅ added Obx
           itemCount: listController.filteredListingData.length,
           itemBuilder: (context, index) {
-            print(index);
             var data = listController.filteredListingData[index];
             var ageGroup = data.ageGroup[0];
             return BuildListingCard(
@@ -26,7 +25,7 @@ class ListingsList extends StatelessWidget {
               title: data.name,
               location: '${data.mainFeatures} | ${data.location}',
               tag: data.price,
-              rating: 4.5,
+              // rating: 4.5,
               description: data.description,
               imageUrl: data.mainImage,
               averageRating: data.averageRating,

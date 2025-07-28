@@ -25,7 +25,7 @@ android {
         applicationId = "com.batteryqk.batteryqk_app"
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
-        versionCode = 9
+        versionCode = 11
         versionName = "1.0.0"
         multiDexEnabled = true
     }

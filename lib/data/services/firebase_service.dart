@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:batteryqk_web_app/common/widgets/show_snack_bar.dart';
 import 'package:batteryqk_web_app/data/services/utility/urls.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -204,27 +203,5 @@ class AuthControllers extends GetxController {
     }
 
     return false;
-  }
-
-  Future<UserCredential?> signInWithFacebook() async {
-    try {
-      final LoginResult loginResult = await FacebookAuth.instance.login(
-        permissions:[],
-      );
-
-      if (loginResult.status == LoginStatus.success) {
-        final AccessToken accessToken = loginResult.accessToken!;
-        final OAuthCredential credential =
-        FacebookAuthProvider.credential(accessToken.tokenString);
-
-        return await FirebaseAuth.instance.signInWithCredential(credential);
-      } else {
-        print('Facebook login failed: ${loginResult.message}');
-        return null;
-      }
-    } catch (e) {
-      print('Facebook login exception: $e');
-      return null;
-    }
   }
 }

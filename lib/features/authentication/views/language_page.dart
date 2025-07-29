@@ -28,7 +28,7 @@ class LanguagePage extends StatelessWidget {
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
           statusBarColor: Colors.white,
-          statusBarIconBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
         ),
         child: SafeArea(
           child: Column(
